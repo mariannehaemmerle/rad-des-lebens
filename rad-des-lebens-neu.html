@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Rad des Lebens – Impulse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background:#fefcf9;
+      font-family:'Poppins', sans-serif;
+      text-align:center;
+      padding:2rem;
+      color:#1f2a44;
+    }
+    h1 {
+      font-family:'Playfair Display', serif;
+      font-size:2rem;
+      color:#1f2a44;
+    }
+    #canvas {
+      margin:2rem auto;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
+    .impuls {
+      margin-top:1.5rem;
+      font-size:1.2rem;
+      white-space:pre-line;
+    }
+    button {
+      background: linear-gradient(145deg, #e8c253, #d4af37);
+      color:white;
+      border:none;
+      padding:12px 24px;
+      font-size:1.1rem;
+      cursor:pointer;
+      border-radius:30px;
+      font-family:'Poppins', sans-serif;
+      box-shadow:0 3px 6px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>Rad des Lebens – Dein Impuls</h1>
+  <canvas id="canvas" width="400" height="400"></canvas>
+  <br><button onclick="dreheRad()">Jetzt drehen</button>
+  <div class="impuls" id="impulsText">Klicke auf „Jetzt drehen“, um deinen heutigen Impuls zu erhalten.</div>
+
+  <script>
+    const bereiche = [
+      {name:'Gesundheit', impuls:'Heute achte auf deinen Körper: Trinke extra viel Wasser & spüre, wie du dich stärkst.'},
+      {name:'Beruf/Berufung', impuls:'Was bringt dich beruflich voran? Mach heute einen kleinen Schritt in Richtung deiner Vision.'},
+      {name:'Finanzen', impuls:'Überlege dir heute: Wofür möchte ich Geld ausgeben, das mir wirklich Freude bringt?'},
+      {name:'Beziehungen', impuls:'Schreibe heute jemandem, dem du dankbar bist – ein ehrliches Wort kann viel bewirken.'},
+      {name:'Persönliches Wachstum', impuls:'Lies heute mindestens 10 Minuten etwas Inspirierendes oder Lehrreiches.'},
+      {name:'Freizeit & Erholung', impuls:'Plane heute bewusst eine Pause: Hör Musik oder gehe spazieren.'},
+      {name:'Umfeld / Wohnsituation', impuls:'Ordne einen Bereich in deinem Zuhause oder Arbeitsplatz – Klang von Klarheit!'},
+      {name:'Spiritualität', impuls:'Nimm dir Zeit für eine kurze Atemübung oder Meditation – 5 Minuten bewusst atmen.'}
+    ];
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width;
+    const H = canvas.height;
+    const radius = W / 2 - 20;
+
+    function zeichneRad() {
+      const schritt = 2 * Math.PI / bereiche.length;
+      bereiche.forEach((b, i) => {
+        ctx.beginPath();
+        ctx.moveTo(W/2,H/2);
+        ctx.arc(W/2,H/2, radius, i*schritt, (i+1)*schritt);
+        ctx.fillStyle = (i%2===0) ? '#d4af37' : '#1f2a44';
+        ctx.fill();
+        ctx.save();
+        ctx.translate(W/2,H/2);
+        ctx.rotate(i*schritt + schritt/2);
+        ctx.fillStyle = 'white';
+        ctx.textAlign = 'right';
+        ctx.font = '14px Poppins';
+        ctx.fillText(b.name, radius - 10, 5);
+        ctx.restore();
+      });
+    }
+
+    let winkelOffset = 0;
+    function dreheRad() {
+      const zufall = Math.random() * 2000 + 2000;
+      const ziel = winkelOffset + zufall;
+      const dauer = 3000;
+      const start = performance.now();
+      function anim(t) {
+        const progress = Math.min((t - start)/dauer, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        winkelOffset = ziel * ease;
+        ctx.clearRect(0,0,W,H);
+        ctx.save();
+        ctx.translate(W/2,H/2);
+        ctx.rotate(winkelOffset * Math.PI/180);
+        ctx.translate(-W/2,-H/2);
+        zeichneRad();
+        ctx.restore();
+        if(progress<1) requestAnimationFrame(anim);
+        else zeigeImpuls();
+      }
+      requestAnimationFrame(anim);
+    }
+
+    function zeigeImpuls() {
+      const schritt = 360 / bereiche.length;
+      const index = Math.floor(((winkelOffset % 360) / schritt + bereiche.length) % bereiche.length);
+      document.getElementById('impulsText').textContent = '🌀 Dein Impuls – Bereich: ' + bereiche[index].name + '\n\n' + bereiche[index].impuls;
+    }
+
+    zeichneRad();
+  </script>
+</body>
+</html>
