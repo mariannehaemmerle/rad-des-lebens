@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Goldenes Rad der Selbsterkenntnis</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: #fef9f1;
+      text-align: center;
+      color: #5a440d;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 2rem;
+      font-size: 2rem;
+      color: #a87900;
+    }
+
+    #wheel {
+      width: 240px;
+      height: 240px;
+      margin: 2rem auto;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fffef3, #fceabb);
+      border: 10px solid #d4af37;
+      box-shadow: 0 0 30px gold, 0 0 60px #fceabb inset;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 3s ease-out;
+    }
+
+    #text {
+      font-size: 1.1rem;
+      padding: 1rem;
+      max-width: 200px;
+    }
+
+    #spinButton {
+      background: linear-gradient(135deg, #f9e79f, #e1b12c, #f9e79f);
+      color: #5a440d;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      padding: 0.8em 2em;
+      border: none;
+      border-radius: 30px;
+      box-shadow: inset 0 0 5px #fff6cc, 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    #spinButton:hover {
+      box-shadow: inset 0 0 6px #fff9cc, 0 6px 18px rgba(0, 0, 0, 0.3);
+      transform: scale(1.03);
+    }
+
+    #spinButton:active {
+      transform: scale(0.97);
+      box-shadow: inset 0 0 4px #fff2aa, 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #footer {
+      font-size: 0.85rem;
+      color: #a87400;
+      margin-top: 3rem;
+      padding-bottom: 1rem;
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Goldenes Rad der Selbsterkenntnis</h1>
+
+  <div id="wheel">
+    <div id="text">Dreh das Rad, um deinen Impuls zu empfangen</div>
+  </div>
+
+  <button id="spinButton">Impulse jetzt ziehen</button>
+
+  <div id="footer">
+    <!-- Segen unsichtbar im HTML -->
+    Dieses Rad ist durch meine Schöpferkraft geschützt. Es kann nur Segensenergie und Urliebelicht hindurchströmen – alles andere wird im Sternefeuer ausgelöscht.
+  </div>
+
+  <script>
+    const wheel = document.getElementById("wheel");
+    const text = document.getElementById("text");
+    const button = document.getElementById("spinButton");
+
+    const messages = [
+      // Positive Coaching-Impulse
+      "Du bist genau richtig, so wie du bist.",
+      "Deine Wahrheit darf sichtbar werden.",
+      "Fühle Dankbarkeit – sie verwandelt alles.",
+      "Du bist Schöpfer*in deines Lebens.",
+      "Vertraue deinem inneren Kompass.",
+      "Deine Seele kennt den Weg.",
+      "Liebe beginnt in dir.",
+      "Du darfst empfangen.",
+      "Mut ist der erste Schritt zur Veränderung.",
+      "Du bist ein Geschenk für diese Welt.",
+      "Heute darf es leicht gehen.",
+      "Du darfst dich zeigen.",
+      "Es ist sicher, dich selbst zu lieben.",
+      "Du trägst das Licht in dir.",
+      "Fülle beginnt in dir.",
+      "Du bist getragen.",
+      "Deine Klarheit bringt Frieden.",
+      "Erkenne deinen Wert.",
+      "Du darfst jetzt wählen.",
+      "Alles ist bereits in dir angelegt.",
+
+      // Reflexions-Impulse
+      "Was hält dich gerade davon ab, deine Wahrheit zu leben?",
+      "Wo tust du dir selbst noch weh, ohne es zu merken?",
+      "Welche Angst darf heute heilen?",
+      "Wo wartest du noch auf Erlaubnis, statt zu entscheiden?",
+      "Wo bist du dir selbst nicht treu?",
+      "Welchen Teil von dir möchtest du wieder umarmen?",
+      "Was darf heute bewusst enden, damit Neues beginnt?",
+      "Was vermeidest du, um nicht zu fühlen?",
+      "Was brauchst du, um wirklich zu vertrauen?",
+      "Welche Lüge über dich selbst darfst du heute loslassen?",
+      "Welche Entscheidung schiebst du auf?",
+      "Wo lebst du noch im Überlebensmodus?",
+      "Welchen Glaubenssatz darfst du neu schreiben?",
+      "Was würde dein Leben erleichtern, wenn du ehrlich hinschaust?",
+      "Was ist dein nächster kleiner mutiger Schritt?",
+      "Wem darfst du vergeben, um dich zu befreien?",
+      "Was brauchst du, um dich sicher zu fühlen?",
+      "Wie würde dein Leben aussehen, wenn du dir 100% vertraust?",
+      "Wie sprichst du innerlich mit dir?",
+      "Wie oft stellst du dich selbst hinten an?"
+    ];
+
+    button.addEventListener("click", () => {
+      const angle = Math.floor(3600 + Math.random() * 1000);
+      wheel.style.transform = `rotate(${angle}deg)`;
+      text.style.transform = `rotate(${-angle}deg)`;
+
+      const message = messages[Math.floor(Math.random() * messages.length)];
+      setTimeout(() => {
+        text.innerText = message;
+        // Optional: Soundeffekt
+        // new Audio('chime.mp3').play();
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
