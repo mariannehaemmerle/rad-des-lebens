@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Goldenes Rad der Selbsterkenntnis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(#fdf8f3, #fbf4e9);
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      padding: 2rem;
+      color: #b2862e;
+    }
+
+    #wheel {
+      width: 350px;
+      height: 350px;
+      margin: 2rem auto;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff8dc, #f2e3b5);
+      border: 10px solid #d4af37;
+      box-shadow: 0 0 40px gold inset, 0 0 20px #bfa046;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 3s ease-out;
+      position: relative;
+    }
+
+    #highlight {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0deg 30deg, rgba(255, 255, 255, 0.4) 30deg 60deg, transparent 60deg 360deg);
+      animation: rotate 4s linear infinite;
+      z-index: 0;
+    }
+
+    #text {
+      font-size: 1.5rem;
+      padding: 1rem;
+      z-index: 1;
+      position: relative;
+    }
+
+    #spinButton {
+      background: linear-gradient(to right, #d4af37, #f9e79f);
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      color: #6c4c1c;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+      transition: background 0.3s;
+    }
+
+    #spinButton:hover {
+      background: linear-gradient(to right, #f1c40f, #f7dc6f);
+    }
+
+    #segen {
+      margin-top: 2rem;
+      font-size: 1rem;
+      color: #a87d2a;
+      background: #fff8e7;
+      border: 1px solid #e7c778;
+      padding: 1rem;
+      border-radius: 15px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Goldenes Rad der Selbsterkenntnis</h1>
+  <div id="wheel">
+    <div id="highlight"></div>
+    <div id="text">Dreh dein Rad für Erkenntnis & Impulse</div>
+  </div>
+  <button id="spinButton">Impulse jetzt ziehen</button>
+  <div id="segen">
+    Dieses Rad ist durch meine Schöpferkraft geschützt. Es kann nur Segensenergie und Urliebelicht hindurchströmen – alles andere wird im Sternefeuer ausgelöscht.
+  </div>
+
+  <audio id="chime">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1b79b4b2a3.mp3?filename=healing-bells-132689.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const wheel = document.getElementById('wheel');
+    const text = document.getElementById('text');
+    const chime = document.getElementById('chime');
+
+    const messages = [
+      // Positive Impulse (20)
+      "Du bist genug, genau so wie du bist.",
+      "Heute darfst du in Leichtigkeit empfangen.",
+      "Vertraue dem Prozess deines Lebens.",
+      "Deine innere Weisheit führt dich.",
+      "Lass dein Licht hell leuchten.",
+      "Du trägst Liebe in dir – zeig sie.",
+      "Heilung geschieht durch Bewusstsein.",
+      "Öffne dein Herz für Wunder.",
+      "Fühle Dankbarkeit – sie verwandelt alles.",
+      "Du darfst deine Träume leben.",
+      "Erlaube dir, Großes zu empfangen.",
+      "Du bist ein Geschenk für diese Welt.",
+      "Es ist sicher, du selbst zu sein.",
+      "Jeder Moment birgt eine neue Chance.",
+      "In deiner Ruhe liegt Kraft.",
+      "Du erschaffst deine Realität.",
+      "Dein Potenzial ist grenzenlos.",
+      "Alles ist für dich, nicht gegen dich.",
+      "Du darfst lieben, ohne Angst.",
+      "Dein Weg entfaltet sich in deinem Tempo.",
+
+      // Coaching-Impulse zur Reflexion (20)
+      "Wo in deinem Leben lebst du gerade im Überlebensmodus?",
+      "Wie sprichst du innerlich mit dir – liebevoll oder kritisch?",
+      "Was würdest du tun, wenn du dich vollkommen wertvoll fühlen würdest?",
+      "Was vermeidest du, obwohl du weißt, es wäre wichtig für dich?",
+      "Welche Angst blockiert dich gerade?",
+      "Wo lässt du dich vom Außen mehr leiten als von deinem Inneren?",
+      "Erkennst du deinen Selbstwert auch ohne Leistung?",
+      "Wo hältst du dich klein, obwohl du groß sein möchtest?",
+      "Welcher alte Glaubenssatz darf jetzt heilen?",
+      "Was hindert dich daran, Hilfe anzunehmen?",
+      "Wo ist noch Unfrieden mit dir selbst?",
+      "Was würdest du loslassen, wenn du wirklich frei wärst?",
+      "Wem darfst du vergeben, um dich zu befreien?",
+      "Wo wünschst du dir mehr Selbstliebe?",
+      "Wie oft stellst du dich selbst hinten an?",
+      "Welche Entscheidung vermeidest du aus Angst vor Konsequenzen?",
+      "Was will deine Seele dir gerade sagen?",
+      "Wie würde dein Leben aussehen, wenn du dir 100% vertraust?",
+      "Wo bist du dir selbst noch nicht treu?",
+      "Was darf heute bewusst enden, damit etwas Neues beginnt?"
+    ];
+
+    document.getElementById('spinButton').onclick = function () {
+      const angle = Math.floor(3600 + Math.random() * 1000);
+      wheel.style.transform = `rotate(${angle}deg)`;
+      const message = messages[Math.floor(Math.random() * messages.length)];
+      setTimeout(() => {
+        text.innerText = message;
+        chime.play();
+      }, 3000);
+    };
+  </script>
+</body>
+</html>
