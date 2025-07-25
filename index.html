@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Dein Impuls – Rad des Lebens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fefaf4;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .wheel-container {
+      background: radial-gradient(circle, #fffbe9 0%, #f6e7ca 100%);
+      border-radius: 50%;
+      width: 400px;
+      height: 400px;
+      box-shadow: 0 0 50px rgba(218,165,32,0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 10px solid gold;
+      transition: transform 2s ease-out;
+    }
+    .impuls {
+      font-size: 1.6rem;
+      color: #cfa600;
+      font-weight: bold;
+      font-family: 'Playfair Display', serif;
+      padding: 2rem;
+    }
+    button {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      background: linear-gradient(to right, #fbe5b7, #ffdf91);
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(218,165,32,0.4);
+      transition: 0.3s;
+      color: #6a4a1a;
+      font-weight: 600;
+    }
+    button:hover {
+      background: linear-gradient(to right, #fff1c4, #ffd700);
+    }
+    @keyframes drehen {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(1440deg); }
+    }
+    .animate {
+      animation: drehen 2s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="wheel-container" id="rad">
+      <div class="impuls" id="impulsText">Dreh das Rad und empfange deinen Impuls des Tages</div>
+    </div>
+    <button onclick="zeigeImpuls()">Impulse jetzt ziehen</button>
+  </div>
+  <script>
+    const impulse = [
+      '✨ Du darfst heute deiner Gesundheit liebevolle Aufmerksamkeit schenken.',
+      '💼 Deine Berufung ruft dich – höre heute bewusst auf deine innere Stimme.',
+      '💛 Öffne dein Herz für liebevolle Beziehungen – ein Gespräch kann heilen.',
+      '💰 Reichtum beginnt im Inneren – erlaube dir heute Fülle zu empfangen.',
+      '📚 Jeder Tag ist ein neues Kapitel – lerne heute etwas, das dich stärkt.',
+      '🕊️ Stille bringt Antworten – nimm dir Zeit für deine spirituelle Verbindung.',
+      '🎨 Schaffe dir Raum für Freude und Inspiration – dein inneres Licht zählt.',
+      '🏡 Ordnung im Außen bringt Klarheit im Innen – wo darf heute Leichtigkeit entstehen?'
+    ];
+    function zeigeImpuls() {
+      const rad = document.getElementById('rad');
+      rad.classList.remove('animate');
+      void rad.offsetWidth;
+      rad.classList.add('animate');
+      const zufall = impulse[Math.floor(Math.random() * impulse.length)];
+      setTimeout(() => {
+        document.getElementById('impulsText').textContent = zufall;
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
