@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Goldenes Rad der Selbsterkenntnis</title>
+  <style>
+    body {
+      background: #fffaf2;
+      font-family: 'Georgia', serif;
+      text-align: center;
+      color: #8B6B1E;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 2rem;
+      font-size: 2.2rem;
+      color: #a67c00;
+    }
+
+    #wheel {
+      width: 260px;
+      height: 260px;
+      margin: 2rem auto;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff8dc, #f2e3b5);
+      border: 12px solid #d4af37;
+      position: relative;
+      box-shadow: 0 0 30px gold, 0 0 40px rgba(255, 215, 0, 0.4);
+      animation: shimmer 3s infinite linear;
+    }
+
+    @keyframes shimmer {
+      0% { box-shadow: 0 0 20px gold, 0 0 40px rgba(255, 215, 0, 0.3); }
+      50% { box-shadow: 0 0 40px gold, 0 0 60px rgba(255, 215, 0, 0.6); }
+      100% { box-shadow: 0 0 20px gold, 0 0 40px rgba(255, 215, 0, 0.3); }
+    }
+
+    #text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #8B6B1E;
+    }
+
+    #spinButton {
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      background: linear-gradient(to right, #f7d47c, #e5c05a);
+      border: none;
+      border-radius: 25px;
+      color: #5c4207;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+    }
+
+    #spinButton:hover {
+      transform: scale(1.05);
+    }
+
+    #segen {
+      margin: 2rem auto;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background: #fff3d6;
+      width: 80%;
+      color: #a67c00;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 235, 175, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <h1>Goldenes Rad der Selbsterkenntnis</h1>
+
+  <div id="wheel">
+    <div id="text">Impulse erscheinen hier ...</div>
+  </div>
+
+  <button id="spinButton">Impulse jetzt ziehen</button>
+
+  <div id="segen">
+    Dieses Rad ist durch meine Schöpferkraft geschützt. Es kann nur Segensenergie und Urliebelicht hindurchströmen – alles andere wird im Sternefeuer ausgelöscht.
+  </div>
+
+  <script>
+    const messages = [
+      "Du bist der Ursprung deiner Heilung.",
+      "Was darf heute gehen, damit du wachsen kannst?",
+      "Erkenne dich selbst – und du veränderst alles.",
+      "Liebe beginnt bei dir.",
+      "Fühle Dankbarkeit – sie verwandelt alles.",
+      "Wo vermeidest du noch deine eigene Größe?",
+      "Was blockiert deine wahre Selbstentfaltung?",
+      "Bist du bereit, deiner Wahrheit zu folgen?",
+      "Vertraue deinem inneren Kompass.",
+      "Wo wartest du noch auf Erlaubnis?",
+      "Du darfst dich entscheiden – jetzt.",
+      "Spürst du, was dich lebendig macht?",
+      "Was braucht dein inneres Kind heute?",
+      "Was würdest du tun, wenn du dir selbst genügst?",
+      "Welcher Teil von dir will gesehen werden?",
+      "Wie würde dein Leben aussehen, wenn du dir 100% vertraust?",
+      "Du bist nicht hier, um klein zu bleiben.",
+      "Was hält dich noch im Überlebensmodus?",
+      "Was darf heute bewusst enden, damit Neues beginnt?",
+      "Wem darfst du vergeben, um dich zu befreien?",
+      "Was ruft deine Seele heute zu dir?",
+      "Was bedeutet Selbstwert für dich – heute?",
+      "Was brauchst du gerade mehr – Mut oder Mitgefühl?",
+      "Stell dir vor, du wärst schon genug – was tust du dann?",
+      "Was kannst du heute liebevoll loslassen?",
+      "Was wäre, wenn heute ein Neubeginn ist?",
+      "Du bist genau zur richtigen Zeit am richtigen Ort.",
+      "Was ist dein nächster liebevoller Schritt?",
+      "Wofür darfst du dir heute selbst danken?",
+      "Überlege, ob du dir Unterstützung gönnen möchtest.",
+      "Reflektiere, wo du dich selbst klein hältst.",
+      "Du trägst den Schlüssel zu deiner Lösung bereits in dir.",
+      "Verbindung entsteht aus Echtheit.",
+      "Du bist mehr geführt, als du glaubst.",
+      "Höre auf dein Herz – es kennt den Weg.",
+      "Manchmal zeigt sich Klarheit durch Stille.",
+      "Was würdest du tun, wenn du schon frei bist?",
+      "Das Leben schenkt dir heute eine Botschaft – höre hin.",
+      "Was darf noch mehr in deine Präsenz kommen?"
+    ];
+
+    const wheel = document.getElementById("wheel");
+    const text = document.getElementById("text");
+    const button = document.getElementById("spinButton");
+
+    button.onclick = function () {
+      const angle = Math.floor(3600 + Math.random() * 1000);
+      wheel.style.transform = `rotate(${angle}deg)`;
+      text.style.transform = `rotate(${-angle}deg)`;
+
+      const message = messages[Math.floor(Math.random() * messages.length)];
+
+      setTimeout(() => {
+        text.innerText = message;
+        // Soundeffekt könnte hier eingebaut werden z.B. über: new Audio('klang.mp3').play();
+      }, 3000);
+    };
+  </script>
+</body>
+</html>
