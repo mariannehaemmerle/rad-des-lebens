@@ -141,7 +141,7 @@
     button.addEventListener("click", () => {
       const angle = Math.floor(3600 + Math.random() * 1000);
       wheel.style.transform = `rotate(${angle}deg)`;
-      text.style.transform = `rotate(${-angle}deg)`;
+      
 
       const message = messages[Math.floor(Math.random() * messages.length)];
       setTimeout(() => {
